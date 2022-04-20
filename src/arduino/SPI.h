@@ -12,6 +12,13 @@
 #define SPI_MODE3 3
 
 
+typedef enum _BitOrder {
+  SPI_BITORDER_MSBFIRST = 1,
+  SPI_BITORDER_LSBFIRST = 0,
+} BusIOBitOrder;
+
+// typedef BitOrder BusIOBitOrder;
+
 class SPISettings
 {
 public:
