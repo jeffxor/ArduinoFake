@@ -10,3 +10,5 @@
 **/Makefile
 !/Makefile
 /Testing/*
+.vscode/
+.pio/

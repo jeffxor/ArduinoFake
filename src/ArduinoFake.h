@@ -13,6 +13,7 @@
 #include "arduino/Arduino.h"
 
 #include "FunctionFake.h"
+#include "SPIFake.h"
 #include "StreamFake.h"
 #include "SerialFake.h"
 #include "WireFake.h"
@@ -36,6 +37,7 @@
 #define _ArduinoFakeGetFunction() _ArduinoFakeGetMock(Function)
 #define _ArduinoFakeGetSerial() _ArduinoFakeGetMock(Serial)
 #define _ArduinoFakeGetWire() _ArduinoFakeGetMock(Wire)
+#define _ArduinoFakeGetSPIClass() _ArduinoFakeGetMock(SPIClass)
 #define _ArduinoFakeGetStream() _ArduinoFakeGetMock(Stream)
 #define _ArduinoFakeGetClient() _ArduinoFakeGetMock(Client)
 #define _ArduinoFakeGetPrint() _ArduinoFakeGetMock(Print)
@@ -65,6 +67,7 @@
 struct ArduinoFakeMocks
 {
     fakeit::Mock<FunctionFake> Function;
+    fakeit::Mock<SPIClassFake> SPIClass;
     fakeit::Mock<SerialFake> Serial;
     fakeit::Mock<WireFake> Wire;
     fakeit::Mock<StreamFake> Stream;
@@ -75,6 +78,7 @@ struct ArduinoFakeMocks
 struct ArduinoFakeInstances
 {
     FunctionFake* Function;
+    SPIClassFake* SPIClass;
     SerialFake* Serial;
     WireFake* Wire;
     StreamFake* Stream;
@@ -90,6 +94,7 @@ class ArduinoFakeContext
         std::map<void*, void*> Mapping;
 
         _ArduinoFakeInstanceGetter1(Print)
+        _ArduinoFakeInstanceGetter1(SPIClass)
         _ArduinoFakeInstanceGetter1(Stream)
         _ArduinoFakeInstanceGetter1(Serial)
         _ArduinoFakeInstanceGetter1(Wire)
@@ -97,6 +102,7 @@ class ArduinoFakeContext
         _ArduinoFakeInstanceGetter1(Function)
 
         _ArduinoFakeInstanceGetter2(Print, Print)
+        _ArduinoFakeInstanceGetter2(SPIClass, SPIClass)
         _ArduinoFakeInstanceGetter2(Client, Client)
         _ArduinoFakeInstanceGetter2(Stream, Stream)
         _ArduinoFakeInstanceGetter2(Serial, Serial_)
@@ -112,12 +118,14 @@ class ArduinoFakeContext
             this->Instances = new ArduinoFakeInstances();
 
             this->Mocks->Function.Reset();
+            this->Mocks->SPIClass.Reset();
             this->Mocks->Stream.Reset();
             this->Mocks->Serial.Reset();
             this->Mocks->Wire.Reset();
             this->Mocks->Client.Reset();
             this->Mocks->Print.Reset();
 
+            Mapping[&::SPI] = this->SPIClass();
             Mapping[&::Serial] = this->Serial();
             Mapping[&::Wire] = this->Wire();
         }
