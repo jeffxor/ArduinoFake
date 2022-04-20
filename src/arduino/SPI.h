@@ -11,10 +11,12 @@
 #define SPI_MODE2 2
 #define SPI_MODE3 3
 
+#define SPI_LSBFIRST 0
+#define SPI_MSBFIRST 1
 
 typedef enum _BitOrder {
-  SPI_BITORDER_MSBFIRST = 1,
-  SPI_BITORDER_LSBFIRST = 0,
+  SPI_BITORDER_MSBFIRST = SPI_MSBFIRST,
+  SPI_BITORDER_LSBFIRST = SPI_LSBFIRST,
 } BusIOBitOrder;
 
 // typedef BitOrder BusIOBitOrder;
