@@ -14,12 +14,7 @@
 #define SPI_LSBFIRST 0
 #define SPI_MSBFIRST 1
 
-typedef enum _BitOrder {
-  SPI_BITORDER_MSBFIRST = SPI_MSBFIRST,
-  SPI_BITORDER_LSBFIRST = SPI_LSBFIRST,
-} BusIOBitOrder;
-
-// typedef BitOrder BusIOBitOrder;
+#define ESP 1
 
 class SPISettings
 {
