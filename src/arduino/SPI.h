@@ -14,7 +14,7 @@
 #define SPI_LSBFIRST 0
 #define SPI_MSBFIRST 1
 
-#define ESP 1
+#define ESP32 1
 
 class SPISettings
 {
